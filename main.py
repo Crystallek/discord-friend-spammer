@@ -46,8 +46,9 @@ def spam(channel):
 
         if rDis.status_code == 429:
             timeToStop = float(jDis["retry_after"])
+	    print(f"Rate limited for {timeToStop} seconds.")
             time.sleep(timeToStop)
-            print(f"Rate limited for {timeToStop} seconds.")
+            
 
 channel = createGroupDM()
 changeGroupDMName(channel)
