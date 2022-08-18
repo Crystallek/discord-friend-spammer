@@ -1,6 +1,6 @@
 <h1 align="center">Hi 👋, I'm Discord Friend Spammer</h1>
 ============
-![](https://komarev.com/ghpvc/?username=aszope&label=REPO+VIEWS)
+<img src="https://komarev.com/ghpvc/?username=aszope&style=flat-square&label=REPO+VIEWS" />
 #What i can do:
 -Translation
 -Annoy your friends!
