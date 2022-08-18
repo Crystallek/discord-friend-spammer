@@ -6,4 +6,4 @@ readme soon
 
 todo
   - translation
-  - support of more groups
+  - support of more groups at once
