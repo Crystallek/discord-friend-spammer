@@ -1,6 +1,6 @@
 import requests, json, time
 
-tokenDiscord = "" # insert ur token here
+tokenDiscord = "" # insert ur token here (bot tokens wont work)
 tokenTrivia = "824c28fc3cmshfa0dfba9bd5ff5bp1bdfbfjsnb90fc16d0447"
 groupDmName = "groupname"
 
