@@ -1,5 +1,6 @@
 <h1 align="center">Hi 👋, I'm Discord Friend Spammer</h1>
 <img src="https://komarev.com/ghpvc/?username=aszope&style=flat-square&label=REPO+VIEWS" />
+
 ## What can I do:
 - Translation
 - Annoy your friends!
