@@ -7,6 +7,7 @@ targetLang = None # example: "de", translation slows down the spam btw
 
 friendsToSpam = [] #max 9 friends for now (paste friends ids as strings here pls, one friend, one string in a list)
 #btw insert only the ids of your friends, you cant insert a random person here
+#example: friendsToSpam = ["123", "456"]
 
 headersDiscordData = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.305 Chrome/69.0.3497.128 Electron/4.0.8 Safari/537.36',
