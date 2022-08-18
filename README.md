@@ -3,7 +3,7 @@
 
 A program, which spams friends in a group DM with a random shit.
 ## What can I do:
-- Translation
+- Translate the trivia stuff into 50+ languages
 - Annoy your friends!
 
 ## Info about me:
