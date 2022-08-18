@@ -1,8 +1,9 @@
-import requests, json, time
+import requests, json, time, deep_translator
 
 tokenDiscord = "" # insert ur token here (bot tokens wont work)
 tokenTrivia = "824c28fc3cmshfa0dfba9bd5ff5bp1bdfbfjsnb90fc16d0447"
 groupDmName = "groupname"
+targetLang = None # example: "de", translation slows down the spam btw
 
 friendsToSpam = [] #max 9 friends for now (paste friends ids as strings here pls, one friend, one string in a list)
 #btw insert only the ids of your friends, you cant insert a random person here
@@ -14,8 +15,8 @@ headersDiscordData = {
 }
 
 headersFactsData = {
-	"X-RapidAPI-Key": tokenTrivia,
-	"X-RapidAPI-Host": "trivia-by-api-ninjas.p.rapidapi.com"
+    "X-RapidAPI-Key": tokenTrivia,
+    "X-RapidAPI-Host": "trivia-by-api-ninjas.p.rapidapi.com"
 }
 
 def createGroupDM():
@@ -39,14 +40,23 @@ def spam(channel):
     while run:
         rTrivia = requests.get("https://trivia-by-api-ninjas.p.rapidapi.com/v1/trivia", headers=headersFactsData)
         jTrivia = json.loads(rTrivia.text)
-        jsonDiscordData = {"content": f"{jTrivia[0]['question']}? {jTrivia[0]['answer']}! @everyone"}
+
+        if targetLang != None:
+            try:
+                question = deep_translator.GoogleTranslator(source='auto', target=targetLang).translate(jTrivia[0]['question'])
+                answer = deep_translator.GoogleTranslator(source='auto', target=targetLang).translate(jTrivia[0]['answer'])
+            except Exception as e:
+                print(f"Could not translate. {e}")
+        question = jTrivia[0]['question']
+        answer = jTrivia[0]['answer']
+        jsonDiscordData = {"content": f"{question}? {answer}! @everyone"}
 
         rDis = requests.post(f"https://discord.com/api/v9/channels/{channel}/messages", headers=headersDiscordData, json=jsonDiscordData)
         jDis = json.loads(rDis.text)
 
         if rDis.status_code == 429:
             timeToStop = float(jDis["retry_after"])
-	    print(f"Rate limited for {timeToStop} seconds.")
+            print(f"Rate limited for {timeToStop} seconds.")
             time.sleep(timeToStop)
             
 
