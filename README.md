@@ -1,4 +1,3 @@
-# discord-friend-spam
 <h1 align="center">Hi 👋, I'm Discord Friend Spammer</h1>
 <img src="https://komarev.com/ghpvc/?username=aszope&style=flat-square&label=REPO+VIEWS" />
 
