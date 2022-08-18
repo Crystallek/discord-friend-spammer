@@ -1,3 +1,9 @@
+lang = "Czech" #Your language
+translation = True #Translation
+from fnmatch import translate
+from translate import Translator
+translator= Translator(to_lang=lang)
+
 import requests, json, time
 
 tokenDiscord = "" # insert ur token here (bot tokens wont work)
@@ -14,8 +20,8 @@ headersDiscordData = {
 }
 
 headersFactsData = {
-	"X-RapidAPI-Key": tokenTrivia,
-	"X-RapidAPI-Host": "trivia-by-api-ninjas.p.rapidapi.com"
+    "X-RapidAPI-Key": tokenTrivia,
+    "X-RapidAPI-Host": "trivia-by-api-ninjas.p.rapidapi.com"
 }
 
 def createGroupDM():
@@ -39,14 +45,19 @@ def spam(channel):
     while run:
         rTrivia = requests.get("https://trivia-by-api-ninjas.p.rapidapi.com/v1/trivia", headers=headersFactsData)
         jTrivia = json.loads(rTrivia.text)
-        jsonDiscordData = {"content": f"{jTrivia[0]['question']}? {jTrivia[0]['answer']}! @everyone"}
+        if(translate):
+            TriviaQuestion = translator.translate(jTrivia[0]['question'])
+            TriviaAnswer = translator.translate(jTrivia[0]['answer'])
+            jsonDiscordData = {"content": f"{TriviaQuestion}? {TriviaAnswer}! @everyone"}
+        else:
+            jsonDiscordData = {"content": f"{jTrivia[0]['question']}? {jTrivia[0]['answer']}! @everyone"}
 
         rDis = requests.post(f"https://discord.com/api/v9/channels/{channel}/messages", headers=headersDiscordData, json=jsonDiscordData)
         jDis = json.loads(rDis.text)
 
         if rDis.status_code == 429:
             timeToStop = float(jDis["retry_after"])
-	    print(f"Rate limited for {timeToStop} seconds.")
+            print(f"Rate limited for {timeToStop} seconds.")
             time.sleep(timeToStop)
             
 
