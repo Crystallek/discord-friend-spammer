@@ -79,8 +79,9 @@ def spam(channel):
 
         if targetLang.lower() != "none":
             try:
-                question = deep_translator.GoogleTranslator(source='auto', target=targetLang.lower()).translate(jTrivia[0]['question']) #fix
-                answer = deep_translator.GoogleTranslator(source='auto', target=targetLang.lower()).translate(jTrivia[0]['answer'])
+                translate = jTrivia[0]['question'] + "|||" + jTrivia[0]['answer']
+                translation = deep_translator.GoogleTranslator(source='auto', target=targetLang.lower()).translate(translate)
+                question, answer = translation.split('|||')
             except Exception as e:
                 print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Could not translate. {e}")
                 question = jTrivia[0]['question']
