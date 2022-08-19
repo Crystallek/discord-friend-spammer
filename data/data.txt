@@ -1,6 +1,6 @@
 # if you want to spam trivia in english, change targetlang to None
 # dont delete these messages pls
-token=NzAwNzQxMzgwNzYyMjM5MDA2.GtG1bK.gI9QJ8P54kxwGh9-xmMdVyemOeOqjgnWMCdf9I
+token=token
 groupname=Name
 targetlang=None
-friendstospam=827871791472050177, 961151076483096596
+friendstospam=123, 456, 789, 012
