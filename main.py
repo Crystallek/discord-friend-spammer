@@ -49,7 +49,7 @@ def createGroupDM():
     global channelSave
     
     if len(friendsToSpam) > 9:
-        print("You can spam only 9 friends at the time (for now).")
+        input("{colorama.Fore.RED}[ERROR]{colorama.Fore.RESET} You can spam only 9 friends at the time (for now).")
         exit()
     else:
         jsonDiscordData = {"recipients": friendsToSpam}
@@ -72,7 +72,7 @@ def createGroupDM():
 
 def changeGroupDMName(channel):
     if channel == 0:
-        input("Rate limited. Wait a few minutes and try again.")
+        input("{colorama.Fore.RED}[ERROR]{colorama.Fore.RESET} Rate limited. Wait a few minutes and try again.")
         exit()
 
     jsonDiscordData = {"name": groupDmName}
@@ -115,9 +115,8 @@ def spam(channel, repeats):
 
 while True:
     if channelSave != 0 and leaveWhenRepeatsAreDone.lower() == "true":
-        print("in")
-        r = requests.delete(f"https://discord.com/api/v9/channels/{channelSave}?silent=true", headers=headersDiscordData, json={"silent": "true"})
-        print(r.text, r.status_code)
+        requests.delete(f"https://discord.com/api/v9/channels/{channelSave}?silent=true", headers=headersDiscordData, json={"silent": "true"})
+        print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Successfully left the group.")
     channel = createGroupDM()
     changeGroupDMName(channel)
     spam(channel, int(repeats))
