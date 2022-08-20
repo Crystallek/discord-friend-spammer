@@ -6,6 +6,9 @@
 - Translate the trivia stuff into 50+ languages (translation slows down the spam btw)
 - Annoy your friends!
 
+##TODO:
+- Add auto leave from group DM when repeats are done.
+
 ## Who are my creators:
 - [Crystallek#3348 - Creator](https://github.com/Crystallek)
 - [Take#8559 - Readme](https://github.com/takoda121)
