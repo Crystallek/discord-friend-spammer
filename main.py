@@ -6,6 +6,7 @@ import time
 import os
 
 start = time.time()
+channelSave = 0
 os.chdir(os.path.dirname(__file__))
 colorama.init(convert=True)
 
@@ -24,8 +25,9 @@ try:
         targetLang = lines[2].removeprefix("targetlang=").replace("\n", "") 
         friendsToSpam = lines[3].removeprefix("friendstospam=").replace("\n", "").replace(" ", "").replace("\"", "").split(",")
         repeats = lines[4].removeprefix("repeats=").replace("\n", "")
+        leaveWhenRepeatsAreDone = lines[5].removeprefix("leavewhenrepeatsdone=").replace("\n", "")
         f.close()
-    print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Settings successfully loaded.\n" + "="*50 + f"\nToken: {tokenDiscord}\nGroup Name: {groupDmName}\nLanguage: {targetLang}\nFriends to spam: {friendsToSpam}\nRepeats: {repeats}\n" + "="*50)
+    print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Settings successfully loaded.\n" + "="*50 + f"\nToken: {tokenDiscord}\nGroup Name: {groupDmName}\nLanguage: {targetLang}\nFriends to spam: {friendsToSpam}\nRepeats: {repeats}\nLeave when repeats are done: {leaveWhenRepeatsAreDone.capitalize()}\n" + "="*50)
 except:
     input(f"\n{colorama.Fore.RED}[ERROR]{colorama.Fore.RESET} File cannot be read. Press any key to exit the program... ")
     exit()
@@ -44,6 +46,8 @@ headersFactsData = {
 
 def createGroupDM():
     global friendsToSpam
+    global channelSave
+    
     if len(friendsToSpam) > 9:
         print("You can spam only 9 friends at the time (for now).")
         exit()
@@ -58,19 +62,29 @@ def createGroupDM():
             exit()
         else:
             jDis = json.loads(rDis.text)
-            print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Group successfully created.")
-            return jDis["id"]
+            if "id" in jDis:
+                print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Group successfully created.")
+
+            try:
+                return jDis["id"]
+            except:
+                return channelSave
 
 def changeGroupDMName(channel):
+    if channel == 0:
+        input("Rate limited. Wait a few minutes and try again.")
+        exit()
+
     jsonDiscordData = {"name": groupDmName}
     r = requests.patch(f"https://discord.com/api/v9/channels/{channel}", headers=headersDiscordData, json=jsonDiscordData)
     if r.status_code != 200:
-        print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Group could not be renamed.")
+        print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Group could not be renamed.", r.status_code)
     else:
         print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Group has been renamed to {groupDmName}!")
-
+        
 def spam(channel, repeats):
-
+    global channelSave
+    channelSave = channel
     for x in range(repeats):
         rTrivia = requests.get("https://trivia-by-api-ninjas.p.rapidapi.com/v1/trivia", headers=headersFactsData)
         jTrivia = json.loads(rTrivia.text)
@@ -100,6 +114,10 @@ def spam(channel, repeats):
             time.sleep(timeToStop)
 
 while True:
+    if channelSave != 0 and leaveWhenRepeatsAreDone.lower() == "true":
+        print("in")
+        r = requests.delete(f"https://discord.com/api/v9/channels/{channelSave}?silent=true", headers=headersDiscordData, json={"silent": "true"})
+        print(r.text, r.status_code)
     channel = createGroupDM()
     changeGroupDMName(channel)
     spam(channel, int(repeats))
