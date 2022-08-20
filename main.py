@@ -68,9 +68,6 @@ def changeGroupDMName(channel):
         print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Group could not be renamed.")
     else:
         print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Group has been renamed to {groupDmName}!")
-    end = time.time()
-    loadTime = round(end - start, 3)
-    print(f"{colorama.Fore.YELLOW}[FACT]{colorama.Fore.RESET} Program has been loaded in {loadTime} seconds.")
 
 def spam(channel, repeats):
 
