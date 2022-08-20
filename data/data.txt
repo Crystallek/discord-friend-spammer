@@ -1,6 +1,6 @@
-# if you want to spam trivia in english, change targetlang to None
-# dont delete these messages pls
 token=token
 groupname=Name
 targetlang=None
 friendstospam=123, 456, 789, 012
+
+# if you want to spam trivia in english, change targetlang to None
