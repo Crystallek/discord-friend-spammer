@@ -1,7 +1,8 @@
 token=token
-groupname=Name
+groupname=name
 targetlang=None
-friendstospam=123, 456, 789, 012
+friendstospam=925482317022117919,699945609116778497
 repeats=50
+leavewhenrepeatsdone=true
 
 # if you want to spam trivia in english, change targetlang to None
