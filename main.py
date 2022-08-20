@@ -23,8 +23,9 @@ try:
         groupDmName = lines[1].removeprefix("groupname=").replace("\n", "")
         targetLang = lines[2].removeprefix("targetlang=").replace("\n", "") 
         friendsToSpam = lines[3].removeprefix("friendstospam=").replace("\n", "").replace(" ", "").replace("\"", "").split(",")
+        repeats = lines[4].removeprefix("repeats=").replace("\n", "")
         f.close()
-    print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Settings successfully loaded.\n" + "="*50 + f"\nToken: {tokenDiscord}\nGroup Name: {groupDmName}\nLanguage: {targetLang}\nFriends to spam: {friendsToSpam}\n" + "="*50)
+    print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Settings successfully loaded.\n" + "="*50 + f"\nToken: {tokenDiscord}\nGroup Name: {groupDmName}\nLanguage: {targetLang}\nFriends to spam: {friendsToSpam}\nRepeats: {repeats}\n" + "="*50)
 except:
     input(f"\n{colorama.Fore.RED}[ERROR]{colorama.Fore.RESET} File cannot be read. Press any key to exit the program... ")
     exit()
@@ -67,13 +68,13 @@ def changeGroupDMName(channel):
         print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Group could not be renamed.")
     else:
         print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Group has been renamed to {groupDmName}!")
-
-def spam(channel):
     end = time.time()
     loadTime = round(end - start, 3)
     print(f"{colorama.Fore.YELLOW}[FACT]{colorama.Fore.RESET} Program has been loaded in {loadTime} seconds.")
 
-    while 1:
+def spam(channel, repeats):
+
+    for x in range(repeats):
         rTrivia = requests.get("https://trivia-by-api-ninjas.p.rapidapi.com/v1/trivia", headers=headersFactsData)
         jTrivia = json.loads(rTrivia.text)
 
@@ -101,6 +102,7 @@ def spam(channel):
             print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Rate limited for {timeToStop} seconds.")
             time.sleep(timeToStop)
 
-channel = createGroupDM()
-changeGroupDMName(channel)
-spam(channel)
+while True:
+    channel = createGroupDM()
+    changeGroupDMName(channel)
+    spam(channel, int(repeats))
