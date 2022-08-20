@@ -2,5 +2,6 @@ token=token
 groupname=Name
 targetlang=None
 friendstospam=123, 456, 789, 012
+repeats=50
 
 # if you want to spam trivia in english, change targetlang to None
