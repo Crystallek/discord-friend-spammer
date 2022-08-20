@@ -19,10 +19,10 @@ print(f"""{colorama.Fore.BLUE}  _____ _____  _____  _____ ____  _____  _____    
 try:
     with open("data/data.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
-        tokenDiscord = lines[2].removeprefix("token=").replace("\n", "")
-        groupDmName = lines[3].removeprefix("groupname=").replace("\n", "")
-        targetLang = lines[4].removeprefix("targetlang=").replace("\n", "") 
-        friendsToSpam = lines[5].removeprefix("friendstospam=").replace("\n", "").replace(" ", "").replace("\"", "").split(",")
+        tokenDiscord = lines[0].removeprefix("token=").replace("\n", "")
+        groupDmName = lines[1].removeprefix("groupname=").replace("\n", "")
+        targetLang = lines[2].removeprefix("targetlang=").replace("\n", "") 
+        friendsToSpam = lines[3].removeprefix("friendstospam=").replace("\n", "").replace(" ", "").replace("\"", "").split(",")
         f.close()
     print(f"{colorama.Fore.GREEN}[SUCCESS]{colorama.Fore.RESET} Settings successfully loaded.\n" + "="*50 + f"\nToken: {tokenDiscord}\nGroup Name: {groupDmName}\nLanguage: {targetLang}\nFriends to spam: {friendsToSpam}\n" + "="*50)
 except:
