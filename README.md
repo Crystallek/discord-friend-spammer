@@ -6,7 +6,7 @@
 - Translate the trivia stuff into 50+ languages (translation slows down the spam btw)
 - Annoy your friends!
 
-##TODO:
+## TODO:
 - Add auto leave from group DM when repeats are done.
 
 ## Who are my creators:
