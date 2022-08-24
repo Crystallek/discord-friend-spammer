@@ -7,7 +7,7 @@
 - Annoy your friends!
 
 ## TODO:
-- Add auto leave from group DM when repeats are done.
+- Nothing
 
 ## Who are my creators:
 - [Crystallek#3348 - Creator](https://github.com/Crystallek)
