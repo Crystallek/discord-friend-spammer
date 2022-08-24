@@ -111,7 +111,7 @@ def spam(channel, repeats):
         if rDis.status_code == 429:
             timeToStop = float(jDis["retry_after"])
             print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Rate limited for {timeToStop} seconds.")
-            time.sleep(timeToStop)
+            time.sleep(timeToStop + 3)
 
 while True:
     if channelSave != 0 and leaveWhenRepeatsAreDone.lower() == "true":
