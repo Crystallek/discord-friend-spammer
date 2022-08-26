@@ -94,6 +94,7 @@ def spam(channel, repeats):
                 translate = jTrivia[0]['question'] + "|||" + jTrivia[0]['answer']
                 translation = deep_translator.GoogleTranslator(source='auto', target=targetLang.lower()).translate(translate)
                 question, answer = translation.split('|||')
+                time.sleep(0.3)
             except Exception as e:
                 print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Could not translate. {e}")
                 question = jTrivia[0]['question']
@@ -112,6 +113,7 @@ def spam(channel, repeats):
             timeToStop = float(jDis["retry_after"])
             print(f"{colorama.Fore.YELLOW}[WARN]{colorama.Fore.RESET} Rate limited for {timeToStop} seconds.")
             time.sleep(timeToStop + 3)
+        
 
 while True:
     if channelSave != 0 and leaveWhenRepeatsAreDone.lower() == "true":
